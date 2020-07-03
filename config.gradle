@@ -1,0 +1,45 @@
+ext {
+    appVersion = 1.0
+    isRelease = false
+
+    androidCompile = [
+            compileSdkVersion: 29,
+            buildToolsVersion: "29.0.0",
+            minSdkVersion    : 21,
+            targetSdkVersion : 29,
+            versionCode      : 1,
+            versionName      : "1.0",
+            appId            : "com.crazyorange.beauty.weather"
+
+    ]
+
+
+    /**
+     * 版本号管理
+     */
+    appCompatVersion = "28.0.0"
+    constraintVersion = "1.1.3"
+    autoSizeVersion = "1.1.0"
+    eventBusVersion = "3.1.1"
+    gsonVersion = "2.8.5"
+    grpcVersion = "1.19.0"
+    androidxVersion = "1.1.0"
+    lifeVersion = "1.1.1"
+    arouterVersion = "1.5.0"
+    retrofitVersion = "2.6.1"
+    /**
+     * 第三方库的引用
+     */
+    dependencies = [
+            "constraintLayout": "androidx.constraintlayout:constraintlayout:${constraintVersion}",
+            "lifeRuntime"     : "android.arch.lifecycle:runtime:${lifeVersion}",
+            "lifeExtensions"  : "android.arch.lifecycle:extensions:${lifeVersion}",
+            "lifeCompiler"    : "android.arch.lifecycle:compiler:${lifeVersion}",
+            "androidxCompat"  : "androidx.appcompat:appcompat:${androidxVersion}",
+            "eventBus"        : "org.greenrobot:eventbus:${eventBusVersion}",
+            "autoSize"        : "me.jessyan:autosize:${autoSizeVersion}",
+            "arouter-api"     : "com.alibaba:arouter-api:${arouterVersion}",
+            "retrofit-convert": "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+
+    ]
+}
