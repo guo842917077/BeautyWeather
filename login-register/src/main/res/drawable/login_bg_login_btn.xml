@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--第一层阴影-->
+    <item
+        android:left="3dp"
+        android:top="3dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="32dp" />
+            <solid android:color="#0F000000" />
+        </shape>
+    </item>
+    <!--第二层前景-->
+    <item
+        android:bottom="3dp"
+        android:right="3dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="32dp" />
+            <solid android:color="@color/login_register_btn_color" />
+            <stroke
+                android:width="1px"
+                android:color="@color/login_register_btn_color" />
+        </shape>
+    </item>
+</layer-list>

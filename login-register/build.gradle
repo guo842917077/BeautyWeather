@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-
 def androidCompile = rootProject.ext.androidCompile
 def isRelease = rootProject.ext.isRelease
 def importLibrary = rootProject.ext.dependencies
@@ -8,7 +7,7 @@ android {
     compileSdkVersion androidCompile.compileSdkVersion
 
     defaultConfig {
-        applicationId appId.hostId
+        applicationId appId.loginId
         minSdkVersion androidCompile.minSdkVersion
         targetSdkVersion androidCompile.targetSdkVersion
         versionCode androidCompile.versionCode
@@ -43,4 +42,6 @@ dependencies {
     implementation importLibrary["lifeExtensions"]
     implementation importLibrary["lifeCompiler"]
     implementation importLibrary["arouter-api"]
+    implementation importLibrary["lottie"]
+
 }
