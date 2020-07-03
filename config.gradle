@@ -8,11 +8,12 @@ ext {
             minSdkVersion    : 21,
             targetSdkVersion : 29,
             versionCode      : 1,
-            versionName      : "1.0",
-            appId            : "com.crazyorange.beauty.weather"
-
+            versionName      : "1.0"
     ]
-
+    appId = [
+            hostId : "com.crazyorange.beauty.weather",
+            loginId: "com.crazyorange.beauty.login"
+    ]
 
     /**
      * 版本号管理
@@ -26,7 +27,9 @@ ext {
     androidxVersion = "1.1.0"
     lifeVersion = "1.1.1"
     arouterVersion = "1.5.0"
+    arouterCompilerVersion = "1.2.2"
     retrofitVersion = "2.6.1"
+    lottieVersion = "3.4.0"
     /**
      * 第三方库的引用
      */
@@ -39,7 +42,8 @@ ext {
             "eventBus"        : "org.greenrobot:eventbus:${eventBusVersion}",
             "autoSize"        : "me.jessyan:autosize:${autoSizeVersion}",
             "arouter-api"     : "com.alibaba:arouter-api:${arouterVersion}",
+            "arouter-compiler": "com.alibaba:arouter-comiler:${arouterCompilerVersion}",
             "retrofit-convert": "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-
+            "lottie":"com.airbnb.android:lottie:${lottieVersion}"
     ]
 }

@@ -1,2 +1,3 @@
+include ':login-register'
 include ':app'
 rootProject.name = "BeautyWeather"
