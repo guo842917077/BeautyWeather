@@ -7,7 +7,7 @@ import android.os.Bundle;
 /**
  * @author CrazyOrange
  *
- * Orange Weather Login Page
+ * Login Page
  */
 public class LoginActivity extends AppCompatActivity {
 
