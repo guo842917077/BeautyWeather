@@ -1,3 +1,5 @@
+include ':database-user'
+include ':baselibrary'
 include ':login-register'
 include ':app'
 rootProject.name = "BeautyWeather"

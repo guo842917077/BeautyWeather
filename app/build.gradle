@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 def androidCompile = rootProject.ext.androidCompile
-def isRelease = rootProject.ext.isRelease
+def isDebug = rootProject.ext.isDebug
 def importLibrary = rootProject.ext.dependencies
 def appId = rootProject.ext.appId
 android {
@@ -23,11 +23,11 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField("boolean", "IsRelease", String.valueOf(isRelease))
+            buildConfigField("boolean", "IsDebug", String.valueOf(isDebug))
         }
 
         release {
-            buildConfigField("boolean", "IsRelease", String.valueOf(isRelease))
+            buildConfigField("boolean", "IsDebug", String.valueOf(isDebug))
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
