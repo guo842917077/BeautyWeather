@@ -3,6 +3,7 @@ def androidCompile = rootProject.ext.androidCompile
 def isRelease = rootProject.ext.isRelease
 def importLibrary = rootProject.ext.dependencies
 def appId = rootProject.ext.appId
+def enableBinding = rootProject.ext.enableDataBinding
 android {
     compileSdkVersion androidCompile.compileSdkVersion
 
@@ -17,6 +18,13 @@ android {
                 includeCompileClasspath = true
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
+        }
+        dataBinding {
+            enabled enableBinding
+        }
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
         }
     }
 
@@ -36,6 +44,7 @@ android {
 dependencies {
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation project(":baselibrary")
     implementation importLibrary["constraintLayout"]
     implementation importLibrary["androidxCompat"]
     implementation importLibrary["lifeRuntime"]
