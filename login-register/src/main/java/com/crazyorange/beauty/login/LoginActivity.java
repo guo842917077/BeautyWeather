@@ -6,9 +6,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.crazyorange.beauty.R;
-import com.crazyorange.beauty.baselibrary.log.ALog;
 import com.crazyorange.beauty.databinding.ActivityLoginBinding;
 import com.crazyorange.beauty.viewmodel.UserViewModel;
 
@@ -53,17 +53,27 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void registerListener() {
-        mUserVM.getUserName().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                // 更新 UI
-                ALog.d("TAG", "on User name data change");
-            }
-        });
         mUserVM.getPassword().observe(this, new Observer<String>() {
             @Override
-            public void onChanged(String s) {
+            public void onChanged(String password) {
+                mDataBinding.etPwd.setText(password);
+            }
+        });
+        mUserVM.getUserName().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String username) {
+                mDataBinding.etUname.setText(username);
+            }
+        });
 
+        mDataBinding.btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String username = mDataBinding.etUname.getText().toString();
+                String password = mDataBinding.etPwd.getText().toString();
+                mUserVM.setUserName(username);
+                mUserVM.setPassword(password);
+                mUserVM.saveLastLoginUser(username, password);
             }
         });
     }

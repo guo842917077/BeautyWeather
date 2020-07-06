@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 def androidCompile = rootProject.ext.androidCompile
-def isRelease = rootProject.ext.isRelease
+def isDebug = rootProject.ext.isDebug
 def importLibrary = rootProject.ext.dependencies
 def appId = rootProject.ext.appId
 def enableBinding = rootProject.ext.enableDataBinding
@@ -30,11 +30,11 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField("boolean", "IsRelease", String.valueOf(isRelease))
+            buildConfigField("boolean", "IsDebug", String.valueOf(isDebug))
         }
 
         release {
-            buildConfigField("boolean", "IsRelease", String.valueOf(isRelease))
+            buildConfigField("boolean", "IsDebug", String.valueOf(isDebug))
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -45,6 +45,7 @@ dependencies {
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(":baselibrary")
+    implementation project(":database-user")
     implementation importLibrary["constraintLayout"]
     implementation importLibrary["androidxCompat"]
     implementation importLibrary["lifeRuntime"]
