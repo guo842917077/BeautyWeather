@@ -1,23 +1,22 @@
-apply plugin: 'com.android.application'
-
+apply plugin: 'com.android.library'
+def enableBinding = rootProject.ext.enableDataBinding
 def androidCompile = rootProject.ext.androidCompile
 def isDebug = rootProject.ext.isDebug
 def importLibrary = rootProject.ext.dependencies
-def appId = rootProject.ext.appId
 android {
     compileSdkVersion androidCompile.compileSdkVersion
 
     defaultConfig {
-        applicationId appId.hostId
         minSdkVersion androidCompile.minSdkVersion
         targetSdkVersion androidCompile.targetSdkVersion
         versionCode androidCompile.versionCode
         versionName androidCompile.versionName
-        javaCompileOptions {
-            annotationProcessorOptions {
-                includeCompileClasspath = true
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
-            }
+
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+        dataBinding {
+            enabled enableBinding
         }
     }
 
@@ -25,7 +24,6 @@ android {
         debug {
             buildConfigField("boolean", "IsDebug", String.valueOf(isDebug))
         }
-
         release {
             buildConfigField("boolean", "IsDebug", String.valueOf(isDebug))
             minifyEnabled false
@@ -35,12 +33,10 @@ android {
 }
 
 dependencies {
-
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation importLibrary["constraintLayout"]
-    implementation importLibrary["androidxCompat"]
-    implementation importLibrary["lifeRuntime"]
-    implementation importLibrary["lifeExtensions"]
-    implementation importLibrary["lifeCompiler"]
-    implementation importLibrary["arouter-api"]
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
 }
