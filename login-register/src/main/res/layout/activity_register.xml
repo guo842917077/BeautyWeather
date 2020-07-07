@@ -10,11 +10,11 @@
 
         <!--     android:onClick="@{() -> user.saveLastLoginUser(user.userName,user.password)}" -->
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_register"
             android:layout_width="300dp"
             android:layout_height="56dp"
             android:background="@drawable/login_bg_login_btn"
-            android:text="@string/login_btn_login"
+            android:text="@string/login_btn_register"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
             app:layout_constraintHorizontal_bias="0.0"
@@ -107,6 +107,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.airbnb.lottie.LottieAnimationView
@@ -123,17 +124,19 @@
             app:lottie_rawRes="@raw/img_rock_raw" />
 
         <TextView
-            android:id="@+id/tv_register"
+            android:id="@+id/tv_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/hurry_up_register"
+            android:text="@string/sign_in"
             android:textColor="@color/login_register_btn_color"
             android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_register"
+            app:layout_constraintVertical_bias="0.276" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     <!--启用 Databinding 后,页面可以主动绑定数据 -->

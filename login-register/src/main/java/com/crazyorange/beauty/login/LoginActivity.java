@@ -5,6 +5,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 
@@ -36,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         bindContentView();
         bindLifeCycle();
+        addLine();
         mUserVM = createViewModel();
 
         /**
@@ -49,6 +52,11 @@ public class LoginActivity extends AppCompatActivity {
     public void startOverAnimation() {
         mDataBinding.imgOver.setSpeed(0.6f);
         mDataBinding.imgOver.playAnimation();
+    }
+
+    private void addLine() {
+        mDataBinding.tvRegister.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+        mDataBinding.tvRegister.getPaint().setAntiAlias(true);
     }
 
     @Override
@@ -78,21 +86,28 @@ public class LoginActivity extends AppCompatActivity {
                 String username = mDataBinding.etUname.getText().toString();
                 String password = mDataBinding.etPwd.getText().toString();
 
-                if (mUserVM.isUserRegistered(mUserVM.getUserName().getValue(), mUserVM.getPassword().getValue())) {
+                if (mUserVM.isUserRegistered(username, password)) {
+                    String toast = getResources().getString(R.string.login_success);
+                    showSnackToast(toast, getResources().getColor(R.color.login_register_btn_color));
                     mUserVM.saveLastLoginUser(username, password);
                 } else {
                     String toast = getResources().getString(R.string.not_registered);
-                    showSnackToast(toast);
+                    showSnackToast(toast, getResources().getColor(R.color.red_login_err));
                 }
+            }
+        });
+        mDataBinding.tvRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
     }
 
-    public void showSnackToast(String message) {
+    public void showSnackToast(String message, int color) {
         Snackbar.make(mDataBinding.constraintLayout2, message, Snackbar.LENGTH_SHORT)
-                .setBackgroundTint(getResources().getColor(R.color.red_login_err))
+                .setBackgroundTint(color)
                 .show();
-
     }
 
 
