@@ -1,13 +1,22 @@
 package com.crazyorange.beauty.viewmodel;
 
 import android.app.Application;
+import android.os.AsyncTask;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.crazyorange.beauty.R;
 import com.crazyorange.beauty.baselibrary.sp.SpUtil;
+import com.crazyorange.beauty.database.BeautyDBManager;
+import com.crazyorange.beauty.database.user.UserEntity;
+
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
 
 /**
  * @author guojinlong
@@ -24,9 +33,20 @@ public class UserViewModel extends AndroidViewModel {
     private MutableLiveData<String> mPassword;
     private String mKeyLastUser = getApplication().getResources().getString(R.string.key_last_user);
     private String mKeyLastPwd = getApplication().getResources().getString(R.string.key_last_pwd);
+    private UserEntity mUserEntity;
+    private FutureTask<Boolean> mRegisteredTask;
+    private ExecutorService mTaskExecutor;
+
 
     public UserViewModel(Application application) {
         super(application);
+        mTaskExecutor = Executors.newSingleThreadExecutor();
+        mRegisteredTask = new FutureTask<>(new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                return checkIsUserRegistered(mUserName.getValue(), mPassword.getValue());
+            }
+        });
         initialUserData();
     }
 
@@ -54,6 +74,23 @@ public class UserViewModel extends AndroidViewModel {
         }
     }
 
+    private boolean checkIsUserRegistered(String username, String password) {
+        return BeautyDBManager.instance(getApplication()).getUserDao().queryUser(username, password) > 0;
+    }
+
+    public boolean isUserRegistered(String username, String password) {
+        setUserName(username);
+        setPassword(password);
+        mTaskExecutor.execute(mRegisteredTask);
+        try {
+            return mRegisteredTask.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     /**
      * 设置用户名

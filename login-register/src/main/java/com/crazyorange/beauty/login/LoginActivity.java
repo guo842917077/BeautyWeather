@@ -11,6 +11,7 @@ import android.view.View;
 import com.crazyorange.beauty.R;
 import com.crazyorange.beauty.databinding.ActivityLoginBinding;
 import com.crazyorange.beauty.viewmodel.UserViewModel;
+import com.google.android.material.snackbar.Snackbar;
 
 /**
  * @author crazyorange
@@ -42,13 +43,18 @@ public class LoginActivity extends AppCompatActivity {
          */
         bindViewModel();
         registerListener();
-        mDataBinding.imgOver.playAnimation();
+
+    }
+
+    public void startOverAnimation() {
         mDataBinding.imgOver.setSpeed(0.6f);
+        mDataBinding.imgOver.playAnimation();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        startOverAnimation();
     }
 
 
@@ -71,11 +77,22 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = mDataBinding.etUname.getText().toString();
                 String password = mDataBinding.etPwd.getText().toString();
-                mUserVM.setUserName(username);
-                mUserVM.setPassword(password);
-                mUserVM.saveLastLoginUser(username, password);
+
+                if (mUserVM.isUserRegistered(mUserVM.getUserName().getValue(), mUserVM.getPassword().getValue())) {
+                    mUserVM.saveLastLoginUser(username, password);
+                } else {
+                    String toast = getResources().getString(R.string.not_registered);
+                    showSnackToast(toast);
+                }
             }
         });
+    }
+
+    public void showSnackToast(String message) {
+        Snackbar.make(mDataBinding.constraintLayout2, message, Snackbar.LENGTH_SHORT)
+                .setBackgroundTint(getResources().getColor(R.color.red_login_err))
+                .show();
+
     }
 
 
@@ -94,6 +111,5 @@ public class LoginActivity extends AppCompatActivity {
     private void bindContentView() {
         mDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
     }
-
 
 }

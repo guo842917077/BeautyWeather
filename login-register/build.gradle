@@ -53,5 +53,6 @@ dependencies {
     implementation importLibrary["lifeCompiler"]
     implementation importLibrary["arouter-api"]
     implementation importLibrary["lottie"]
+    implementation importLibrary["material-desgin"]
 
 }
