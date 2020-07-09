@@ -1,3 +1,5 @@
+include ':comm-config'
+include ':comm-permission'
 include ':database-user'
 include ':baselibrary'
 include ':login-register'

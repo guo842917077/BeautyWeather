@@ -10,11 +10,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.crazyorange.beauty.R;
+import com.crazyorange.beauty.comm.config.RoutePage;
 import com.crazyorange.beauty.databinding.ActivityRegisterBinding;
 import com.crazyorange.beauty.viewmodel.UserViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
+/**
+ * @author guojinlong
+ * <p>
+ * 注册界面
+ */
+@Route(path = RoutePage.Login.REGISTER)
 public class RegisterActivity extends AppCompatActivity {
     private UserViewModel mUserVM;
     private ActivityRegisterBinding mDataBinding;
@@ -73,7 +82,7 @@ public class RegisterActivity extends AppCompatActivity {
         mDataBinding.tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                ARouter.getInstance().build(RoutePage.Login.LOGIN).navigation();
             }
         });
     }

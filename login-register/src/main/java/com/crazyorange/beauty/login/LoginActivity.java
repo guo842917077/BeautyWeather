@@ -5,12 +5,14 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.crazyorange.beauty.R;
+import com.crazyorange.beauty.comm.config.RoutePage;
 import com.crazyorange.beauty.databinding.ActivityLoginBinding;
 import com.crazyorange.beauty.viewmodel.UserViewModel;
 import com.google.android.material.snackbar.Snackbar;
@@ -25,6 +27,7 @@ import com.google.android.material.snackbar.Snackbar;
  * 4. use ARouter
  * 5. 使用 Databinding
  */
+@Route(path = RoutePage.Login.LOGIN)
 public class LoginActivity extends AppCompatActivity {
     private UserViewModel mUserVM;
     /**
@@ -99,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
         mDataBinding.tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                ARouter.getInstance().build(RoutePage.Login.REGISTER).navigation();
             }
         });
     }

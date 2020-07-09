@@ -32,6 +32,7 @@ ext {
     lottieVersion = "3.4.0"
     roomVersion = "2.2.5"
     materialVersion = "1.1.0"
+    permissionVersion = "2.0.3"
     /**
      * 第三方库的引用
      */
@@ -44,11 +45,12 @@ ext {
             "eventBus"        : "org.greenrobot:eventbus:${eventBusVersion}",
             "autoSize"        : "me.jessyan:autosize:${autoSizeVersion}",
             "arouter-api"     : "com.alibaba:arouter-api:${arouterVersion}",
-            "arouter-compiler": "com.alibaba:arouter-comiler:${arouterCompilerVersion}",
+            "arouter-compiler": "com.alibaba:arouter-compiler:${arouterCompilerVersion}",
             "retrofit-convert": "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
             "lottie"          : "com.airbnb.android:lottie:${lottieVersion}",
             "room"            : "androidx.room:room-runtime:${roomVersion}",
             "room-compiler"   : "androidx.room:room-compiler:${roomVersion}",
-            "material-desgin" : "com.google.android.material:material:${materialVersion}"
+            "material-desgin" : "com.google.android.material:material:${materialVersion}",
+            "permission"      : "com.yanzhenjie:permission:${permissionVersion}"
     ]
 }

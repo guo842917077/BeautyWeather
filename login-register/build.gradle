@@ -46,12 +46,15 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(":baselibrary")
     implementation project(":database-user")
+    implementation project(":comm-config")
+
     implementation importLibrary["constraintLayout"]
     implementation importLibrary["androidxCompat"]
     implementation importLibrary["lifeRuntime"]
     implementation importLibrary["lifeExtensions"]
     implementation importLibrary["lifeCompiler"]
     implementation importLibrary["arouter-api"]
+    annotationProcessor importLibrary["arouter-compiler"]
     implementation importLibrary["lottie"]
     implementation importLibrary["material-desgin"]
 

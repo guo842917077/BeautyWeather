@@ -126,6 +126,7 @@ public class UserViewModel extends AndroidViewModel {
         return false;
     }
 
+
     public boolean isAccountOccupied(String username) {
         mUserEntity.getValue().setUsername(username);
         mTaskExecutor.submit(mOccupiedTask);
