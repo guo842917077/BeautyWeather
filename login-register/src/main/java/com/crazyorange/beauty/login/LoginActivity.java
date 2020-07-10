@@ -5,12 +5,17 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.crazyorange.beauty.R;
+import com.crazyorange.beauty.comm.config.RoutePage;
 import com.crazyorange.beauty.databinding.ActivityLoginBinding;
 import com.crazyorange.beauty.viewmodel.UserViewModel;
+import com.google.android.material.snackbar.Snackbar;
 
 /**
  * @author crazyorange
@@ -22,6 +27,7 @@ import com.crazyorange.beauty.viewmodel.UserViewModel;
  * 4. use ARouter
  * 5. 使用 Databinding
  */
+@Route(path = RoutePage.Login.LOGIN)
 public class LoginActivity extends AppCompatActivity {
     private UserViewModel mUserVM;
     /**
@@ -35,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         bindContentView();
         bindLifeCycle();
+        addLine();
         mUserVM = createViewModel();
 
         /**
@@ -42,13 +49,23 @@ public class LoginActivity extends AppCompatActivity {
          */
         bindViewModel();
         registerListener();
-        mDataBinding.imgOver.playAnimation();
+
+    }
+
+    public void startOverAnimation() {
         mDataBinding.imgOver.setSpeed(0.6f);
+        mDataBinding.imgOver.playAnimation();
+    }
+
+    private void addLine() {
+        mDataBinding.tvRegister.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+        mDataBinding.tvRegister.getPaint().setAntiAlias(true);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        startOverAnimation();
     }
 
 
@@ -71,11 +88,29 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = mDataBinding.etUname.getText().toString();
                 String password = mDataBinding.etPwd.getText().toString();
-                mUserVM.setUserName(username);
-                mUserVM.setPassword(password);
-                mUserVM.saveLastLoginUser(username, password);
+
+                if (mUserVM.isUserRegistered(username, password)) {
+                    String toast = getResources().getString(R.string.login_success);
+                    showSnackToast(toast, getResources().getColor(R.color.login_register_btn_color));
+                    mUserVM.saveLastLoginUser(username, password);
+                } else {
+                    String toast = getResources().getString(R.string.not_registered);
+                    showSnackToast(toast, getResources().getColor(R.color.red_login_err));
+                }
             }
         });
+        mDataBinding.tvRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ARouter.getInstance().build(RoutePage.Login.REGISTER).navigation();
+            }
+        });
+    }
+
+    public void showSnackToast(String message, int color) {
+        Snackbar.make(mDataBinding.constraintLayout2, message, Snackbar.LENGTH_SHORT)
+                .setBackgroundTint(color)
+                .show();
     }
 
 
@@ -94,6 +129,5 @@ public class LoginActivity extends AppCompatActivity {
     private void bindContentView() {
         mDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
     }
-
 
 }

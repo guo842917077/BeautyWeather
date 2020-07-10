@@ -20,6 +20,9 @@ public interface UserDao {
     @Query("SELECT COUNT(*) FROM user WHERE username =:username and password =:password")
     int queryUser(String username, String password);
 
+    @Query("SELECT COUNT(*) FROM user WHERE username =:username")
+    int queryUserByName(String username);
+
     /**
      * 插入用户
      * INSERT INTO user (uid,username,password,date) VALUES (.....)

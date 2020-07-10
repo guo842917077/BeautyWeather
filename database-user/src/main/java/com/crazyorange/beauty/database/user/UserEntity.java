@@ -13,7 +13,7 @@ public class UserEntity {
     @ColumnInfo(name = "pk_id")
     private int id;
     @ColumnInfo(name = "u_id")
-    private int uid;
+    private String uid;
 
     @ColumnInfo(name = "username")
     private String username;
@@ -58,11 +58,11 @@ public class UserEntity {
         this.datetime = datetime;
     }
 
-    public int getUid() {
+    public String getUid() {
         return uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(String uid) {
         this.uid = uid;
     }
 }

@@ -1,0 +1,40 @@
+apply plugin: 'com.android.library'
+def enableBinding = rootProject.ext.enableDataBinding
+def androidCompile = rootProject.ext.androidCompile
+def isDebug = rootProject.ext.isDebug
+def importLibrary = rootProject.ext.dependencies
+android {
+    compileSdkVersion androidCompile.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion androidCompile.minSdkVersion
+        targetSdkVersion androidCompile.targetSdkVersion
+        versionCode androidCompile.versionCode
+        versionName androidCompile.versionName
+
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+        dataBinding {
+            enabled enableBinding
+        }
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField("boolean", "IsDebug", String.valueOf(isDebug))
+        }
+        release {
+            buildConfigField("boolean", "IsDebug", String.valueOf(isDebug))
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    api importLibrary["retrofit"]
+    api importLibrary["retrofit-gson"]
+
+}

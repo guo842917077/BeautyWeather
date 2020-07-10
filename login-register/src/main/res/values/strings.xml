@@ -3,6 +3,16 @@
     <string name="login_username">用户名</string>
     <string name="login_password">密码</string>
     <string name="login_btn_login">登录</string>
+    <string name="login_btn_register">注册</string>
     <string name="key_last_user">KEY_LAST_USER</string>
     <string name="key_last_pwd">KEY_LAST_PWD</string>
+    <string name="not_registered">用户名或密码错误</string>
+    <string name="hurry_up_register">还没有账号么？快来注册一个吧</string>
+    <string name="sign_in">已经有账号了?  快去登录吧</string>
+    <string name="registered_err">注册失败</string>
+    <string name="account_is_occupied">当前账号已注册</string>
+    <string name="confirm">确定</string>
+    <string name="registered_success">注册成功,快去登录吧</string>
+    <string name="account_cannot_null">用户名和密码不能为空</string>
+    <string name="login_success">登录成功</string>
 </resources>
