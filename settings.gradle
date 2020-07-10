@@ -1,3 +1,5 @@
+include ':comm-network'
+include ':weather'
 include ':comm-config'
 include ':comm-permission'
 include ':database-user'

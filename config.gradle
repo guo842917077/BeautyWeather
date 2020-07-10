@@ -11,8 +11,9 @@ ext {
             versionName      : "1.0"
     ]
     appId = [
-            hostId : "com.crazyorange.beauty.weather",
-            loginId: "com.crazyorange.beauty.login"
+            hostId   : "com.crazyorange.beauty.weather",
+            loginId  : "com.crazyorange.beauty.login",
+            weatherId: "com.crazyorange.beauty.weather"
     ]
 
     /**
@@ -33,6 +34,8 @@ ext {
     roomVersion = "2.2.5"
     materialVersion = "1.1.0"
     permissionVersion = "2.0.3"
+    retrofitVersion = "2.8.0"
+    gsonVersion = "2.8.5"
     /**
      * 第三方库的引用
      */
@@ -51,6 +54,9 @@ ext {
             "room"            : "androidx.room:room-runtime:${roomVersion}",
             "room-compiler"   : "androidx.room:room-compiler:${roomVersion}",
             "material-desgin" : "com.google.android.material:material:${materialVersion}",
-            "permission"      : "com.yanzhenjie:permission:${permissionVersion}"
+            "permission"      : "com.yanzhenjie:permission:${permissionVersion}",
+            "retrofit"        : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            "retrofit-gson"   : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            "gson"            : "com.google.code.gson:gson:${gsonVersion}"
     ]
 }
