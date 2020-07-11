@@ -1,5 +1,6 @@
 package com.crazyorange.beauty.permission.andpermission;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import com.crazyorange.beauty.permission.IPermissionResponse;
@@ -18,11 +19,30 @@ public class CallAndPermission implements IRequestPermissions {
                 .permission(Permission.READ_EXTERNAL_STORAGE,
                         Permission.WRITE_EXTERNAL_STORAGE)
                 .onDenied(new Action<List<String>>() {
+                    @Override
+                    public void onAction(List<String> data) {
+                        callback.onFailure(data);
+                    }
+                }).onGranted(new Action<List<String>>() {
             @Override
             public void onAction(List<String> data) {
-                callback.onFailure(data);
+                callback.onSuccess(data);
             }
-        }).onGranted(new Action<List<String>>() {
+        }).start();
+    }
+
+    @SuppressLint("WrongConstant")
+    @Override
+    public void requestInternet(Context context, final IPermissionResponse callback) {
+        AndPermission.with(context)
+                .runtime()
+                .permission("android.permission.INTERNET", "android.permission.ACCESS_NETWORK_STATE")
+                .onDenied(new Action<List<String>>() {
+                    @Override
+                    public void onAction(List<String> data) {
+                        callback.onFailure(data);
+                    }
+                }).onGranted(new Action<List<String>>() {
             @Override
             public void onAction(List<String> data) {
                 callback.onSuccess(data);
