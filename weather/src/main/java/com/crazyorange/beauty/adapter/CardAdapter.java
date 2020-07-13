@@ -55,13 +55,15 @@ public class CardAdapter extends BaseAdapter {
             holder = (CardHolder) convertView.getTag();
         }
         WeatherEntity.WeatherBean.FutureBean bean = mEntitiys.get(position);
-        holder.mTvTemperature.setText(bean.getTemperature());
+
         holder.mTvDirect.setText(bean.getDirect());
         holder.mTvWeather.setText(bean.getWeather());
         if (bean.getDate().equals(WeatherViewModel.CURRENT_DATE)) {
             holder.mTvDate.setText("今天");
+            holder.mTvTemperature.setText(bean.getTemperature()+"℃");
         } else {
             holder.mTvDate.setText(bean.getDate());
+            holder.mTvTemperature.setText(bean.getTemperature());
         }
         String climate = bean.getWeather();
         changeWeatherImg(holder.mWeatherView, climate);
@@ -70,10 +72,10 @@ public class CardAdapter extends BaseAdapter {
     }
 
     private void changeWeatherImg(LottieAnimationView mWeatherView, String climate) {
-        if (climate.contains("阴") || climate.contains("云")) {
-            mWeatherView.setAnimation(R.raw.weather_raw_cloud);
-        } else if (climate.contains("雨")) {
+        if (climate.contains("雨")) {
             mWeatherView.setAnimation(R.raw.weather_img_rain);
+        } else if (climate.contains("阴") || climate.contains("云")) {
+            mWeatherView.setAnimation(R.raw.weather_raw_cloud);
         } else {
             mWeatherView.setAnimation(R.raw.weather_raw_sun);
         }

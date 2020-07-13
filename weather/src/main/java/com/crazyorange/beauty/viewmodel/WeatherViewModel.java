@@ -18,6 +18,8 @@ import com.crazyorange.beauty.comm.network.exception.HttpError;
 import com.crazyorange.beauty.comm.network.lifecycle.AndroidLifecycle;
 import com.crazyorange.beauty.entity.WeatherEntity;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,12 +58,7 @@ public class WeatherViewModel extends AndroidViewModel {
             @Override
             public void onSuccess(Call<WeatherEntity> call, WeatherEntity weatherEntity) {
                 super.onSuccess(call, weatherEntity);
-                WeatherEntity.WeatherBean.RealtimeBean currentWeather = weatherEntity.getResult().getRealtime();
-                WeatherEntity.WeatherBean.FutureBean bean = new WeatherEntity.WeatherBean.FutureBean();
-                bean.setDate(CURRENT_DATE);
-                bean.setTemperature(currentWeather.getTemperature());
-                bean.setDirect(currentWeather.getDirect());
-                bean.setWeather(currentWeather.getInfo());
+                WeatherEntity.WeatherBean.FutureBean bean = adaptCurrentDate(weatherEntity);
                 mWeatherData.getValue().add(bean);
                 mWeatherData.getValue().addAll(weatherEntity.getResult().getFuture());
                 mWeatherData.setValue(mWeatherData.getValue());
@@ -73,6 +70,23 @@ public class WeatherViewModel extends AndroidViewModel {
 
             }
         });
+    }
+
+    /**
+     * 适配今天的天气信息
+     *
+     * @param weatherEntity
+     * @return
+     */
+    @NotNull
+    private WeatherEntity.WeatherBean.FutureBean adaptCurrentDate(WeatherEntity weatherEntity) {
+        WeatherEntity.WeatherBean.RealtimeBean currentWeather = weatherEntity.getResult().getRealtime();
+        WeatherEntity.WeatherBean.FutureBean bean = new WeatherEntity.WeatherBean.FutureBean();
+        bean.setDate(CURRENT_DATE);
+        bean.setTemperature(currentWeather.getTemperature());
+        bean.setDirect(currentWeather.getDirect());
+        bean.setWeather(currentWeather.getInfo());
+        return bean;
     }
 
     public MutableLiveData<List<WeatherEntity.WeatherBean.FutureBean>> getWeatherData() {

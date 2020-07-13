@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -12,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.crazyorange.beauty.adapter.CardAdapter;
-import com.crazyorange.beauty.adapter.WeatherAdapter;
 import com.crazyorange.beauty.baselibrary.view.cardswipe.SwpieFlingView;
 import com.crazyorange.beauty.comm.config.RoutePage;
 import com.crazyorange.beauty.entity.WeatherEntity;
@@ -25,8 +23,6 @@ import java.util.List;
 
 /**
  * 主页天气界面
- * https://github.com/qq908323236/TanTanCard
- * https://github.com/mcxtzhang/ZLayoutManager
  *
  * @author guojinlong
  */
@@ -36,7 +32,6 @@ public class WeatherActivity extends AppCompatActivity {
     private WeatherViewModel mWeatherModel;
     private WeatherMainActivityBinding mDataBinding;
     private CardAdapter mWeatherAdapter;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
