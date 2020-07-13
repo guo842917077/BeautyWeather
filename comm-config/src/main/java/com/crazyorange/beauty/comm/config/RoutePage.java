@@ -5,4 +5,8 @@ public class RoutePage {
         String LOGIN = "/login/login";
         String REGISTER = "/login/register";
     }
+
+    public interface Weather {
+        String MAIN = "/weather/main";
+    }
 }
