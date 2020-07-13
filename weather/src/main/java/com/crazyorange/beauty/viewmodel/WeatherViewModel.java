@@ -41,7 +41,7 @@ public class WeatherViewModel extends AndroidViewModel {
         WeatherAPI weatherAPI = RetrofitManager.instance()
                 .syncRetrofit(API.WEATHER_BASE_URL)
                 .create(WeatherAPI.class);
-        Call<WeatherEntity> weatherCall = weatherAPI.requestWeather("天津", SignConfig.WEATHER_API_SIGN_KEY);
+        Call<WeatherEntity> weatherCall = weatherAPI.requestWeather("天津", SignConfig.getApiKey() );
         weatherCall.bindToLifecycle(AndroidLifecycle.createLifecycleProvider(owner), Lifecycle.Event.ON_DESTROY);
         weatherCall.enqueue(new DefaultCallback<WeatherEntity>() {
             @Override
