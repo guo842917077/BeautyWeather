@@ -96,7 +96,7 @@ public class WeatherActivity extends AppCompatActivity {
 
             @Override
             public void onAdapterAboutToEmpty(int itemsInAdapter) {
-
+                mWeatherModel.requestWeatherData(WeatherActivity.this);
             }
 
             @Override

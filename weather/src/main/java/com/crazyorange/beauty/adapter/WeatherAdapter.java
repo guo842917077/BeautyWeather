@@ -49,7 +49,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherH
         public WeatherHolder(@NonNull View itemView) {
             super(itemView);
             mTvTemperature = itemView.findViewById(R.id.tv_temperature);
-            mWeatherView = itemView.findViewById(R.id.img_weather);
+            mWeatherView = itemView.findViewById(R.id.img_climate);
         }
     }
 }

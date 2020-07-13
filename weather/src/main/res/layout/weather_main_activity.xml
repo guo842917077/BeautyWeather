@@ -11,17 +11,17 @@
 
         <com.crazyorange.beauty.baselibrary.view.cardswipe.SwpieFlingView
             android:id="@+id/swipe_card"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.454"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.137"
+            app:layout_constraintVertical_bias="0.084"
             app:max_visible="4"
             app:min_adapter_stack="4"
-            app:y_offset_step="28dp" />
+            app:y_offset_step="18dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

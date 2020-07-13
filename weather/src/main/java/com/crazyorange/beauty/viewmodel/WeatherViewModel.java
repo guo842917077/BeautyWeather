@@ -9,7 +9,6 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 
 import com.crazyorange.beauty.api.WeatherAPI;
-import com.crazyorange.beauty.baselibrary.log.ALog;
 import com.crazyorange.beauty.comm.config.API;
 import com.crazyorange.beauty.comm.config.SignConfig;
 import com.crazyorange.beauty.comm.network.RetrofitManager;
@@ -25,6 +24,7 @@ import java.util.List;
 public class WeatherViewModel extends AndroidViewModel {
     private MutableLiveData<List<WeatherEntity.WeatherBean.FutureBean>> mWeatherData;
     private MutableLiveData<String> mErrorMsg;
+    public static final String CURRENT_DATE = "CURRENT_DATE";
 
     public WeatherViewModel(@NonNull Application application) {
         super(application);
@@ -55,11 +55,10 @@ public class WeatherViewModel extends AndroidViewModel {
 
             @Override
             public void onSuccess(Call<WeatherEntity> call, WeatherEntity weatherEntity) {
-                ALog.d("TAG", "Weather request success");
                 super.onSuccess(call, weatherEntity);
                 WeatherEntity.WeatherBean.RealtimeBean currentWeather = weatherEntity.getResult().getRealtime();
                 WeatherEntity.WeatherBean.FutureBean bean = new WeatherEntity.WeatherBean.FutureBean();
-                bean.setDate("-1");
+                bean.setDate(CURRENT_DATE);
                 bean.setTemperature(currentWeather.getTemperature());
                 bean.setDirect(currentWeather.getDirect());
                 bean.setWeather(currentWeather.getInfo());

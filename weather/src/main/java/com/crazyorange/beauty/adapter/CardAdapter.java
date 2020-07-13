@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.crazyorange.beauty.entity.WeatherEntity;
+import com.crazyorange.beauty.viewmodel.WeatherViewModel;
 import com.crazyorange.beauty.weather.R;
 
 import java.util.List;
@@ -47,12 +48,36 @@ public class CardAdapter extends BaseAdapter {
             convertView.setTag(holder);
             holder.mTvTemperature = convertView.findViewById(R.id.tv_temperature);
             holder.mWeatherView = convertView.findViewById(R.id.img_weather);
+            holder.mTvDirect = convertView.findViewById(R.id.tv_direct);
+            holder.mTvWeather = convertView.findViewById(R.id.tv_climate);
+            holder.mTvDate = convertView.findViewById(R.id.tv_date);
         } else {
             holder = (CardHolder) convertView.getTag();
         }
-        holder.mTvTemperature.setText(mEntitiys.get(position).getTemperature());
-        holder.mWeatherView.playAnimation();
+        WeatherEntity.WeatherBean.FutureBean bean = mEntitiys.get(position);
+        holder.mTvTemperature.setText(bean.getTemperature());
+        holder.mTvDirect.setText(bean.getDirect());
+        holder.mTvWeather.setText(bean.getWeather());
+        if (bean.getDate().equals(WeatherViewModel.CURRENT_DATE)) {
+            holder.mTvDate.setText("今天");
+        } else {
+            holder.mTvDate.setText(bean.getDate());
+        }
+        String climate = bean.getWeather();
+        changeWeatherImg(holder.mWeatherView, climate);
+
         return convertView;
+    }
+
+    private void changeWeatherImg(LottieAnimationView mWeatherView, String climate) {
+        if (climate.contains("阴") || climate.contains("云")) {
+            mWeatherView.setAnimation(R.raw.weather_raw_cloud);
+        } else if (climate.contains("雨")) {
+            mWeatherView.setAnimation(R.raw.weather_img_rain);
+        } else {
+            mWeatherView.setAnimation(R.raw.weather_raw_sun);
+        }
+        mWeatherView.playAnimation();
     }
 
     public void remove(int index) {
@@ -65,5 +90,8 @@ public class CardAdapter extends BaseAdapter {
     private static class CardHolder {
         TextView mTvTemperature;
         LottieAnimationView mWeatherView;
+        TextView mTvDirect;
+        TextView mTvWeather;
+        TextView mTvDate;
     }
 }
