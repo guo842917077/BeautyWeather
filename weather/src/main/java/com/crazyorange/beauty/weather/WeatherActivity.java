@@ -24,6 +24,7 @@ import java.util.List;
 /**
  * 主页天气界面
  *
+ * 使用 AdMob 植入广告
  * @author guojinlong
  */
 @Route(path = RoutePage.Weather.MAIN)

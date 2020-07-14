@@ -93,6 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                     String toast = getResources().getString(R.string.login_success);
                     showSnackToast(toast, getResources().getColor(R.color.login_register_btn_color));
                     mUserVM.saveLastLoginUser(username, password);
+                    ARouter.getInstance().build(RoutePage.Weather.MAIN).navigation();
                 } else {
                     String toast = getResources().getString(R.string.not_registered);
                     showSnackToast(toast, getResources().getColor(R.color.red_login_err));

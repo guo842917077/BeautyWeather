@@ -1,15 +1,25 @@
-apply plugin: 'com.android.application'
-
 def androidCompile = rootProject.ext.androidCompile
 def isDebug = rootProject.ext.isDebug
 def importLibrary = rootProject.ext.dependencies
 def appId = rootProject.ext.appId
 def enableBinding = rootProject.ext.enableDataBinding
+
+def isPackage = rootProject.ext.isPackage;
+
+if (isPackage) {
+    apply plugin: 'com.android.library'
+} else {
+    apply plugin: 'com.android.application'
+}
+
+
 android {
     compileSdkVersion androidCompile.compileSdkVersion
 
     defaultConfig {
-        applicationId appId.weatherId
+        if (!isPackage) {
+            applicationId appId.weatherId
+        }
         minSdkVersion androidCompile.minSdkVersion
         targetSdkVersion androidCompile.targetSdkVersion
         versionCode androidCompile.versionCode
@@ -38,6 +48,18 @@ android {
             buildConfigField("boolean", "IsDebug", String.valueOf(isDebug))
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            if (!isPackage) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                java {
+                    exclude '**/debug/**'
+                }
+            }
         }
     }
 }
