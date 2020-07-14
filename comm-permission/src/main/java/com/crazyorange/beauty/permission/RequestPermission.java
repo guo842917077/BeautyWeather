@@ -11,10 +11,10 @@ import com.crazyorange.beauty.permission.andpermission.CallAndPermission;
  */
 
 public class RequestPermission implements IRequestPermissions {
-    public static volatile RequestPermission instance = null;
-    public CallAndPermission mPermissionInstance;
+    private static volatile RequestPermission instance = null;
+    public static volatile CallAndPermission mPermissionInstance;
 
-    public RequestPermission instance() {
+    public static RequestPermission instance() {
         if (instance == null) {
             synchronized (RequestPermission.class) {
                 if (instance == null) {
@@ -30,5 +30,10 @@ public class RequestPermission implements IRequestPermissions {
     @Override
     public void requestStorage(Context context, IPermissionResponse callback) {
         mPermissionInstance.requestStorage(context, callback);
+    }
+
+    @Override
+    public void requestInternet(Context context, IPermissionResponse callback) {
+        mPermissionInstance.requestInternet(context, callback);
     }
 }
