@@ -23,7 +23,7 @@
 static const char *classPath = "com/crazyorange/beauty/comm/config/SignConfig";
 
 jstring signApiKey(JNIEnv *env) {
-    return env->NewStringUTF("439d997ab533caa2ba2fb99c610b3f39c");
+    return env->NewStringUTF("439d997ab533caa2ba2fb99c610b3f39");
 }
 
 

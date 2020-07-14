@@ -15,7 +15,6 @@ if (isPackage) {
 
 android {
     compileSdkVersion androidCompile.compileSdkVersion
-
     defaultConfig {
         if (!isPackage) {
             applicationId appId.weatherId
@@ -62,6 +61,7 @@ android {
             }
         }
     }
+    resourcePrefix "weather_"
 }
 
 

@@ -62,4 +62,31 @@ ext {
             "gson"            : "com.google.code.gson:gson:${gsonVersion}",
             "recycleView"     : "androidx.recyclerview:recyclerview:${recycleVersion}"
     ]
+
+    defaultAppConfig = {
+        extension ->
+            extension.compileSdkVersion androidCompile.compileSdkVersion
+            extension.buildToolsVersion androidCompile.buildToolsVersion
+            extension.defaultConfig {
+                minSdkVersion androidCompile.minSdkVersion
+                targetSdkVersion androidCompile.targetSdkVersion
+                versionCode androidCompile.versionCode
+                versionName androidCompile.versionName
+
+                javaCompileOptions {
+                    annotationProcessorOptions {
+                        includeCompileClasspath = true
+                        arguments = [AROUTER_MODULE_NAME: project.getName()]
+                    }
+                }
+                compileOptions {
+                    sourceCompatibility JavaVersion.VERSION_1_8
+                    targetCompatibility JavaVersion.VERSION_1_8
+                }
+            }
+
+            extension.dataBinding {
+                enabled enableDataBinding
+            }
+    }
 }
