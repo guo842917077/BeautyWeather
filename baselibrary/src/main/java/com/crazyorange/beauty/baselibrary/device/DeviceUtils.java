@@ -1,7 +1,13 @@
 package com.crazyorange.beauty.baselibrary.device;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
+
+import androidx.core.app.ActivityCompat;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -57,4 +63,25 @@ public class DeviceUtils {
         }
         return buf.toString();
     }
+
+    public static String getSubscriberId(Context context) {
+        TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) !=
+                PackageManager.PERMISSION_GRANTED) {
+            return "";
+        }
+        return manager.getSubscriberId();
+    }
+
+    public static int getUid(Context context) {
+        try {
+            PackageManager pm = context.getPackageManager();
+            ApplicationInfo ai = pm.getApplicationInfo(context.getPackageName(), 0);
+            return ai.uid;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
 }
