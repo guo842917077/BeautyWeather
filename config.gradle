@@ -38,6 +38,7 @@ ext {
     retrofitVersion = "2.8.0"
     gsonVersion = "2.8.5"
     recycleVersion = "1.0.0"
+    asyncInflateVersion = "1.0.0"
     /**
      * 第三方库的引用
      */
@@ -60,7 +61,8 @@ ext {
             "retrofit"        : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
             "retrofit-gson"   : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
             "gson"            : "com.google.code.gson:gson:${gsonVersion}",
-            "recycleView"     : "androidx.recyclerview:recyclerview:${recycleVersion}"
+            "recycleView"     : "androidx.recyclerview:recyclerview:${recycleVersion}",
+            "asyncInflate"    : "androidx.asynclayoutinflater:asynclayoutinflater:${asyncInflateVersion}"
     ]
 
     defaultAppConfig = {
