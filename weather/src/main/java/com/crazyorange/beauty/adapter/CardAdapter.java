@@ -6,6 +6,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.asynclayoutinflater.view.AsyncLayoutInflater;
+
 import com.airbnb.lottie.LottieAnimationView;
 import com.crazyorange.beauty.entity.WeatherEntity;
 import com.crazyorange.beauty.viewmodel.WeatherViewModel;
@@ -60,7 +64,7 @@ public class CardAdapter extends BaseAdapter {
         holder.mTvWeather.setText(bean.getWeather());
         if (bean.getDate().equals(WeatherViewModel.CURRENT_DATE)) {
             holder.mTvDate.setText("今天");
-            holder.mTvTemperature.setText(bean.getTemperature()+"℃");
+            holder.mTvTemperature.setText(bean.getTemperature() + "℃");
         } else {
             holder.mTvDate.setText(bean.getDate());
             holder.mTvTemperature.setText(bean.getTemperature());
