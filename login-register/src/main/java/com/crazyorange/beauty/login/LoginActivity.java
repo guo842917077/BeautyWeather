@@ -7,10 +7,13 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.Debug;
+import android.os.Trace;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.crazyorange.beauty.BuildConfig;
 import com.crazyorange.beauty.R;
 import com.crazyorange.beauty.comm.config.RoutePage;
 import com.crazyorange.beauty.databinding.ActivityLoginBinding;
@@ -38,7 +41,12 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
+        if (BuildConfig.IsDebug) {
+            Trace.beginSection("Weather-Login");
+            Debug.startMethodTracing("Weather-Login");
+        }
         bindContentView();
         bindLifeCycle();
         addLine();
@@ -49,7 +57,6 @@ public class LoginActivity extends AppCompatActivity {
          */
         bindViewModel();
         registerListener();
-
     }
 
     public void startOverAnimation() {
@@ -66,6 +73,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         startOverAnimation();
+        if (BuildConfig.IsDebug) {
+            Debug.stopMethodTracing();
+            Trace.endSection();
+        }
     }
 
 
