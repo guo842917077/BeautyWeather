@@ -82,6 +82,7 @@ public class NetWorkUtils {
                 bucket[1] = tx;
                 return bucket;
             }
+
         } catch (RemoteException e) {
             Log.d("TAG", e.getMessage());
         }
